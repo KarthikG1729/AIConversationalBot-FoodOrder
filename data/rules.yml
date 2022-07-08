@@ -1,0 +1,57 @@
+version: '3.1'
+
+rules:
+ - rule: greetings the user
+   steps:
+   - intent: greet
+   - action: utter_greet
+
+ - rule: Providing the menu
+   steps:
+   - intent: menu
+   - action: utter_menu
+
+ - rule: Confirm that the bot is not a human
+   steps:
+   - intent: check_human
+   - action: utter_bot
+
+ # - rule: Order placed
+ #   steps:
+ #   - intent: inform
+ #   - action: utter_order_placed
+
+ - rule: activate pizza form
+   steps:
+   - intent: request_pizza   # intent that triggers form activation
+   - action: pizza_form      # run the form
+   - active_loop: pizza_form # this form is active
+
+ - rule: submit form
+   condition:
+   - active_loop: pizza_form   # this form must be active
+   steps:
+     - action: pizza_form      # run the form
+     - active_loop: null            # the form is no longer active because it has been filled
+     - action: utter_order_confirm        # action to take after the form is complete
+
+ - rule: out-of-scope
+   steps:
+   - intent: out_of_scope
+   - action: utter_out_of_scope
+
+ # - rule: change order
+ #   steps:
+ #   - intent: change_order
+ #   - action: utter_change_order
+
+ # - rule: order confirmed
+ #   steps:
+ #   - intent: affirm
+ #   - action: utter_order_placed
+
+ 
+ # - rule: order denied
+ #   steps:
+ #   - intent: deny
+ #   - action: utter_deny

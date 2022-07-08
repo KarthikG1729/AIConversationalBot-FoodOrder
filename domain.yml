@@ -1,0 +1,84 @@
+version: '3.1'
+intents:
+- affirm
+- change_order
+- check_human
+- deny
+- greet
+- inform
+- menu
+- out_of_scope
+- request_pizza
+entities:
+- pizza_quantity
+- pizza_size
+- pizza_type
+forms:
+  pizza_form:
+    required_slots:
+    - pizza_type
+    - pizza_size
+    - pizza_quantity
+slots:
+  pizza_type:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: pizza_type
+  pizza_size:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: pizza_size
+  pizza_quantity:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: pizza_quantity
+responses:
+  utter_greet:
+  - text: |-
+      Hey! Hope you are doing good! 
+       I am a Pizza Ordering bot
+  utter_menu:
+  - text: |-
+      We have follow pizzas to select from.
+      Farmhouse
+      Exotic Chilly
+      Chicken Sausage,
+      Margherita.
+  utter_order_confirm:
+  - text: |-
+      Shall I confirm the following order.
+       - pizza: {pizza_type} 
+       - size: {pizza_size} 
+       - quantity:{pizza_quantity}
+  utter_order_placed:
+  - text: The order has been placed sucessfully. You will receive in 30 minutes
+  utter_ask_pizza_type:
+  - text: What pizza do you want?
+  utter_ask_pizza_quantity:
+  - text: How many pizza do you want?
+  utter_ask_pizza_size:
+  - text: How much size you want? (select in between small,large,medium)
+  utter_out_of_scope:
+  - text: Sorry, I'm not sure how to respond to that.
+  utter_bot:
+  - text: I'm a virtual assistant made with Rasa.
+  utter_deny:
+  - text: The order has been cancelled.
+  utter_change_order:
+  - text: Do you want to change the order
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+actions:
+- action_change
+- utter_change_order
+- utter_greet
+- utter_order_confirm
+- utter_order_placed
+- utter_out_of_scope

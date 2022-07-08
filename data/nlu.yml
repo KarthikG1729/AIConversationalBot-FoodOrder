@@ -1,0 +1,219 @@
+version: "3.1"
+nlu:
+- intent: check_human
+  examples: |
+    - are you a bot?
+    - am i speaking to an ai?
+    - are you a human or a bot?
+    - are you real?
+    - are you virtual?
+    - are you an ai?
+    - aren't you a bot
+    - are you a chatbot
+    - are you a rasa bot?
+    - are you a real bot?
+    - are you a robot
+    - are you ai
+    - are you artificial
+    - are you artificial intelligence
+    - are you real
+    - are you really a bot
+    - are you robot
+    - are you sure that you're a bot?
+    - bot?
+- intent: affirm
+  examples: |
+    - indeed
+    - correct
+    - that sounds good
+    - yes
+    - yess please
+    - of course
+    - yup
+    - yeah
+    - yes please
+    - yes plz
+    - Sure
+    - Ok
+    - sweet
+    - cool,
+    - yes...
+    - y
+    - ok
+    - ye
+    - okay
+    - That would be great
+    - YES
+    - YUP
+    - Yea
+    - Yeah
+    - Yeah sure
+    - Yep
+    - Yep that's fine
+    - Yep!
+    - Yepp
+    - Yes
+    - Yes I do
+    - Yes please
+    - Yes please!
+    - Yes, I accept
+- intent: deny
+  examples: |
+    - not really
+    - no
+    - I don't think so
+    - never
+    - no way
+    - nope
+    - no thanks
+    - I dunno
+    - Nothing!
+    - nevermind
+    - n
+    - i decline
+    - i don not like this
+    - i don't think so
+    - i don't want either of those
+    - i don't want to
+    - i dont want to
+    - i dont want to accept
+    - i'm not sure
+    - Cancel the order
+    - Cancel
+    - Stop
+    - I dont want to continue
+    - Stop asking
+    - dont ask
+    - Nope
+    - CAncel the before one please
+- intent: change_order
+  examples: |
+    - Sorry could you change the order please.
+    - Sorry could you change it to [large](pizza_size) size.
+    - Make it to [4](pizza_quantity) pizzas.
+    - Sorry [2] pizzas.
+    - Cancel the order and take a new order.
+    - retake the order.
+    - note the order again
+    - Change the order please
+    - Please the chage the order to [medium](pizza_size) size.
+    - Change the order
+- intent: greet
+  examples: |
+    - Hi
+    - Hey!
+    - Hello
+    - Good day
+    - Good morning
+    - hey dude
+    - Good Afternoon
+    - Good Evening
+    - good morning
+    - yo
+    - Whats up
+    - Hola
+    - Hey there
+    - Morning
+    - hi
+    - hihi
+- intent: menu
+  examples: |
+    - Can I get the menu please?
+    - Menu please?
+    - Can you please provide the menu?
+    - What do you have for today?
+    - What pizza types do you have?
+    - What is the menu for today
+    - menu
+    - Types of pizzas
+    - Could you provide menu please
+    - What type of pizzas do you have today.
+    - Please provide the menu card.
+- intent: request_pizza
+  examples: |
+    - I want to order a pizza
+    - I want to order [Margherita](pizza_type) from the pizza hut.
+    - I would like to order food
+    - im looking to have [Margherita](pizza_type) of [small](pizza_size) size.
+    - Order a [large](pizza_size) pizza.
+    - I want to have pizza.
+    - I want to have the [medium](pizza_size) sized pizza.
+    - Order a pizza
+    - Single pizza
+    - Order pizza please.
+    - Please order a pizza.
+    - Can you order a pizza for me.
+    - Order pizza
+    - ordre
+- intent: out_of_scope
+  examples: |
+    - What is 2 + 2?
+    - Who's the US President?
+    - What is your name?
+    - Where is your home
+    - 3+3?
+    - Weather today
+    - Is this Sunday today?
+    - Is this Funday.
+    - Are you dumb?
+    - tell me a joke
+    - Can I get a hamburger?
+    - Can YouTube talk?
+    - Can you call me back ?
+    - Can you give me your datacenter's password
+    - Can you give me your datacenter's password?
+    - Can you make sandwiches?
+    - Can you please send me an uber
+    - What is my account balance
+    - I want to transfer money to a friend
+    - I want to call my friend
+    - Can you make calls
+    - Can you send email
+
+- intent: inform
+  examples: |
+    - I want to have [Margherita](pizza_type) pizza.
+    - Place the order for [Chicken Sausage](pizza_type)
+    - Order [Farmhouse](pizza_type)
+    - [Farm house](pizza_type)
+    - [Exotic Chilly](pizza_type)
+    - Please order [Exotic Chilly](pizza_type)
+    - Order [Farm house](pizza_type) please.
+    - Please order [Chicken Sausage](pizza_type)
+    - [Chicken Sausage](pizza_type) please.
+    - [Farm house](pizza_type) please.
+    - I want to have [Chicken Sausage](pizza_type) pizza of [medium](pizza_size) size.
+    - [small](pizza_size) size pizza
+    - [large](pizza_size) size pizza
+    - Want to have [small](pizza_size) sized [Exotic Chilly](pizza_type).
+    - [Margherita](pizza_type) [large](pizza_size)
+    - [medium](pizza_size) [Margherita](pizza_type)
+    - [large](pizza_size) [Chicken Sausage](pizza_type)
+    - [small](pizza_size) [Chicken Sausage](pizza_type)
+    - [Chicken Sausage](pizza_type) [medium](pizza_size)
+    - [large](pizza_size) [Farmhouse](pizza_type)
+    - [small](pizza_size) [Farmhouse](pizza_type)
+    - I want to have [small](pizza_size) [Margherita](pizza_type) pizza.
+    - Place the order for [Chicken Sausage](pizza_type) [medium](pizza_size).
+    - Order [Farmhouse](pizza_type) [small](pizza_size).
+    - Please! Place the order for [Exatic Chilly](pizza_type) [medium](pizza_size) [1](pizza_quantity).
+    - [2](pizza_quantity) [Chicken Sausage](pizza) pizza
+    - [10](pizza_quantity)
+    - [5](pizza_quantity)
+    - [6](pizza_quantity)
+    - [3](pizza_quantity) [medium](pizza_size) sized pizza.
+    - [3](pizza_quantity) [large](pizza_size) sized pizza.
+    - [Margharita](pizza_type)
+    - [small](pizza_size)
+    - [2](pizza_quantity)
+    - [Farmhouse](pizza_type)
+    - [Margherita](pizza_type)
+    - [small](pizza_size)
+    - [1](pizza_quantity)
+- lookup: pizza_type
+  examples: |
+    - Farmhouse
+    - farmhouse
+    - Exotic Chilly
+    - Chicken Sausage
+    - Margherita

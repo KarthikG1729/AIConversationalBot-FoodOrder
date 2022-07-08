@@ -1,0 +1,223 @@
+version: '3.1'
+
+
+stories:
+- story: greet+ order + out of scope+accept
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: request_pizza
+  - action: pizza_form
+  - active_loop : pizza_form
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+  - action: pizza_form
+  - active_loop: null
+  - action: utter_order_confirm
+  - intent: affirm
+  - action: utter_order_placed
+
+- story: Happy path -1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: request_pizza
+  - action: pizza_form
+  - active_loop : pizza_form
+  - active_loop: null
+  - action: utter_order_confirm
+  - intent: affirm
+  - action: utter_order_placed
+
+- story: order + ask confirmation + change order +deny
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: request_pizza
+  - action: pizza_form
+  - active_loop : pizza_form
+  - active_loop: null
+  - action: utter_order_confirm
+  - or: 
+    - intent: deny
+    - intent: change_order
+  - action: utter_change_order
+  - intent: deny
+  - action: utter_deny
+
+- story: order + ask confirmation + change order + confirm
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: request_pizza
+  - action: pizza_form
+  - active_loop : pizza_form
+  - active_loop: null
+  - action: utter_order_confirm
+  - intent: deny
+  - action: utter_change_order
+  - intent: affirm
+  - action: action_change
+  - action: pizza_form
+  - active_loop : pizza_form
+  - active_loop: null
+  - action: utter_order_confirm
+  - intent: affirm
+  - action: utter_order_placed
+
+
+
+
+- story: greet+ order + out_of_scope+ deny or change order
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: request_pizza
+  - action: pizza_form
+  - active_loop : pizza_form
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+  - action: pizza_form
+  - active_loop: null
+  - action: utter_order_confirm
+  - or: 
+    - intent: deny
+    - intent: change_order
+  - action: utter_change_order
+  - checkpoint: ask_change_order
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: request_pizza
+  - action: pizza_form
+  - active_loop: pizza_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - or:
+    - intent: change_order
+    - intent: deny
+  - action: utter_change_order
+  - checkpoint: ask_change_order
+
+- story: interactive_story_2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: request_pizza
+  - action: pizza_form
+  - active_loop: pizza_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - or:
+    - intent: change_order
+    - intent: deny
+  - action: utter_change_order
+  - checkpoint: ask_change_order
+
+- story: interactive_story_3
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: request_pizza
+  - action: pizza_form
+  - active_loop: pizza_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - slot_was_set:
+    - requested_slot: pizza_quantity
+  - or: 
+    - intent: change_order
+    - intent: deny
+  - action: utter_change_order
+  - checkpoint: ask_change_order
+
+
+- story: changing order + affirm
+  steps:
+  - checkpoint: ask_change_order
+  # - action: utter_change_order
+  - intent: affirm
+  - action: action_change
+  - action: pizza_form
+  - active_loop : pizza_form
+  - active_loop: null
+  - action: utter_order_confirm
+  - checkpoint: ask_order_confirm
+
+- story: changing order + deny
+  steps: 
+    - checkpoint: ask_change_order
+    # - action: utter_change_order
+    - intent: deny
+    - action: utter_deny
+
+- story: order confirmation 
+  steps:
+  - checkpoint: ask_order_confirm
+  # - action: utter_order_confirm
+  - intent: affirm
+  - action: utter_order_placed
+
+
+- story: order deny
+  steps: 
+  - checkpoint: ask_order_confirm
+  # - action: utter_order_confirm
+  - intent: deny
+  - action: utter_change_order
+
+- story: interactive_story_4
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+
+# - story: interactive_story_2
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: request_pizza
+#   - action: pizza_form
+#   - active_loop: pizza_form
+#   - slot_was_set:
+#     - requested_slot: pizza_type
+#   - slot_was_set:
+#     - pizza_type: Farmhouse
+#   - slot_was_set:
+#     - requested_slot: pizza_size
+#   - intent: deny
+#   - action: utter_change_order
+#   - intent: affirm
+#   - action: action_change
+#   - slot_was_set:
+#     - pizza_type: null
+#   - slot_was_set:
+#     - pizza_size: null
+#   - slot_was_set:
+#     - pizza_quantity: null
+#   - action: pizza_form
+#   - slot_was_set:
+#     - requested_slot: pizza_type
+#   - slot_was_set:
+#     - pizza_type: Margherita
+#   - slot_was_set:
+#     - requested_slot: pizza_size
+#   - slot_was_set:
+#     - pizza_size: small
+#   - slot_was_set:
+#     - requested_slot: pizza_quantity
+#   - slot_was_set:
+#     - pizza_quantity: '1'
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: utter_order_confirm
+#   - intent: affirm
+#   - action: utter_order_placed
